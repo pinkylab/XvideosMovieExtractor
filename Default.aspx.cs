@@ -29,6 +29,34 @@ public partial class _Default : Page
             _html = wc.DownloadString(source_url);
         }
 
-        TextBoxResult.Text = _html;
+        System.Text.RegularExpressions.Regex r = 
+            new System.Text.RegularExpressions.Regex(
+@"mobileReplacePlayerDivTwoQual\((?<hikisu>.*)\)",
+System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+        System.Text.RegularExpressions.Match m = r.Match(_html);
+
+        string hikisu = "";
+        while (m.Success)
+        {
+            //一致した対象が見つかったときキャプチャした部分文字列を表示
+            hikisu = m.Groups["hikisu"].Value;
+
+            m = m.NextMatch();
+        }
+
+        string[] strArr = hikisu.Split(',');
+
+        int i = 0;
+        foreach (string str in strArr)
+        {
+            if (str.Contains(@"/mp4/"))
+            {
+                break;
+            }
+            ++i;
+        }
+
+        TextBoxResult.Text = strArr[i].Trim().Trim('\'');
     }
 }
