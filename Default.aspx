@@ -22,4 +22,5 @@
     <asp:TextBox ID="TextBoxURL" runat="server" Width="1000px"></asp:TextBox>
     <asp:Button ID="ButtonAnalyze" runat="server" Text="Button" OnClick="ButtonAnalyze_Click" />
     <asp:TextBox ID="TextBoxResult" runat="server" Height="500px" TextMode="MultiLine" Width="1500px"></asp:TextBox>
+    <asp:HyperLink ID="HyperLinkResult" runat="server">HyperLink</asp:HyperLink>
 </asp:Content>

@@ -25,10 +25,13 @@ public partial class _Default : Page
 
         if (source_url != null)
         {
-            //UTF-8ならこれ1行でもOK
+            // UTF-8ならこれ1行でもOK
+            // 例外処理書く
             _html = wc.DownloadString(source_url);
         }
 
+        // mobileReplacePlayerDivTwoQual関数の引数にmp4形式の動画URLの直リンクがある
+        // 引数部分のみを正規表現で抜き出す
         System.Text.RegularExpressions.Regex r = 
             new System.Text.RegularExpressions.Regex(
 @"mobileReplacePlayerDivTwoQual\((?<hikisu>.*)\)",
@@ -45,11 +48,13 @@ System.Text.RegularExpressions.RegexOptions.IgnoreCase);
             m = m.NextMatch();
         }
 
+        // 引数はカンマ区切りなので、カンマで分割する
         string[] strArr = hikisu.Split(',');
 
         int i = 0;
         foreach (string str in strArr)
         {
+            // 文字列に「/mp4/」って文字があったら動画URLとする
             if (str.Contains(@"/mp4/"))
             {
                 break;
@@ -57,6 +62,11 @@ System.Text.RegularExpressions.RegexOptions.IgnoreCase);
             ++i;
         }
 
-        TextBoxResult.Text = strArr[i].Trim().Trim('\'');
+        // 前後の空白を消した後、シングルクォートも消す
+        string resUrl = strArr[i].Trim().Trim('\'');
+        HyperLinkResult.Text = resUrl;
+        HyperLinkResult.NavigateUrl = resUrl;
+        HyperLinkResult.Target = "_blank";
+        TextBoxResult.Text = resUrl;
     }
 }
