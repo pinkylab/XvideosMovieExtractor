@@ -18,11 +18,11 @@ public partial class _Default : Page
     {
         string strResult = "動画URLの取得に性交しました。";
         HyperLinkResult.Text = "";
+        WebClient wc = new WebClient();
         try
         {
             string source_url = TextBoxURL.Text;
             string _html = "";
-            WebClient wc = new WebClient();
 
             // ユーザーエージェント指定
             wc.Headers.Add("User-Agent", UA_iOS7_1_2);
@@ -55,23 +55,32 @@ public partial class _Default : Page
             // 引数はカンマ区切りなので、カンマで分割する
             string[] strArr = hikisu.Split(',');
 
-            int i = 0;
+            string LowQualUrl = "";
             foreach (string str in strArr)
             {
                 // 文字列に「/mp4/」って文字があったら動画URLとする
                 if (str.Contains(@"/mp4/"))
                 {
-                    break;
+                    // 前後の空白を消した後、シングルクォートも消す
+                    ShowResult(str.Trim().Trim('\''));
+                    // 結果表示したら関数抜ける
+                    return;
                 }
-                ++i;
+                if (str.Contains(@"/3gp/"))
+                {
+                    LowQualUrl = str.Trim().Trim('\'');
+                }
             }
-
-            // 前後の空白を消した後、シングルクォートも消す
-            string resUrl = strArr[i].Trim().Trim('\'');
-            // 結果の表示
-            HyperLinkResult.Text = resUrl;
-            HyperLinkResult.NavigateUrl = resUrl;
-            HyperLinkResult.Target = "_blank";
+            // ループ抜けちゃったってことはHighQual動画が見つからなかった時
+            if (LowQualUrl != "")
+            {
+                ShowResult(LowQualUrl);
+            }
+            else
+            {
+                throw new Exception("動画URLが見つかりませんでした。");
+            }
+            
         }
         catch(Exception ex)
         {
@@ -80,7 +89,16 @@ public partial class _Default : Page
         }
         finally
         {
+            //後始末
+            wc.Dispose();
             TextBoxResult.Text = strResult;
         }
+    }
+
+    void ShowResult(string url)
+    {
+        HyperLinkResult.Text = url;
+        HyperLinkResult.NavigateUrl = url;
+        HyperLinkResult.Target = "_blank";
     }
 }
