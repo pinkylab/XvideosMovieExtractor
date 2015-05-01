@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Xvideos Movie Extracter " Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Title="Xvideos Movie Extractor" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
 
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
     <section class="featured">
@@ -12,10 +12,10 @@
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <h2>URLを入れてね</h2>
-    <asp:TextBox ID="TextBoxURL" runat="server" Width="1000px"></asp:TextBox>
+    <asp:TextBox ID="TextBoxURL" runat="server" Width="90%"></asp:TextBox>
     <asp:Button ID="ButtonAnalyze" runat="server" Text="エロ動画をゲットする" OnClick="ButtonAnalyze_Click" />
     <h3>↓エロ動画への直リンク↓</h3>
-    <asp:HyperLink ID="HyperLinkResult" runat="server"></asp:HyperLink>
+    <asp:HyperLink ID="HyperLinkResult" runat="server" Width="100%"></asp:HyperLink>
     <hr />
     <h2>使い方</h2>
     <p>テキストボックスにxvideosの動画URLを入れてください。「エロ動画をゲットする」ボタンを押すと、エロ動画へのリンクが表示されます。</p>
@@ -23,6 +23,6 @@
     <h2>エラーログ</h2>
     <p>catchしたものをそのまま表示するクソアンドクソ</p>
     <p>エラーが返ってくる場合は基本的に指定されたURLが間違ってる。</p>
-    <asp:TextBox ID="TextBoxResult" runat="server" Height="250px" TextMode="MultiLine" Width="1000px"></asp:TextBox>
+    <asp:TextBox ID="TextBoxResult" runat="server" Height="250px" TextMode="MultiLine" Width="90%"></asp:TextBox>
     
 </asp:Content>

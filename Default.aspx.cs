@@ -17,6 +17,7 @@ public partial class _Default : Page
     protected void ButtonAnalyze_Click(object sender, EventArgs e)
     {
         string strResult = "動画URLの取得に性交しました。";
+        HyperLinkResult.Text = "";
         try
         {
             string source_url = TextBoxURL.Text;
