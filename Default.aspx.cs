@@ -9,8 +9,11 @@ using System.Data.SQLite;
 
 public partial class _Default : Page
 {
-    const string UA_iOS7_1_2 = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_1_2 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) Version/7.0 Mobile/11D257 Safari/9537.53";
 
+    // iPhoneだと動画取得ボタンが表示されなくなったので変更
+    // const string UA_iOS7_1_2 = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_1_2 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) Version/7.0 Mobile/11D257 Safari/9537.53";
+    const string UA_iOS7_1_2 = "Mozilla/5.0 (iPad; CPU OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53";
+    
     protected void Page_Load(object sender, EventArgs e)
     {
 
